@@ -132,13 +132,17 @@ async function loadPublic() {
 }
 
 function openOrder() {
-  $("#order-modal")?.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
+  const panel = $("#order-modal");
+  if (!panel) return;
+  panel.classList.remove("hidden");
+  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.setTimeout(() => panel.querySelector('input[name="full_name"]')?.focus(), 250);
 }
 
 function closeOrder() {
-  $("#order-modal")?.classList.add("hidden");
-  document.body.style.overflow = "";
+  const panel = $("#order-modal");
+  panel?.classList.add("hidden");
+  $("#open-order")?.focus();
 }
 
 $("#open-order")?.addEventListener("click", openOrder);
