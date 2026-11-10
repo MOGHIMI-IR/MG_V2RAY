@@ -42,3 +42,11 @@ Open repository Settings → Pages → Build and deployment → Source → GitHu
 - File objects stay in a private Storage bucket and are delivered through short-lived signed download links.
 - The price is displayed as 210,000 toman for one month, unlimited. Fulfillment and payment are manual.
 - The card number is publicly shown with a copy button.
+
+## 5. Supabase Auth redirect URL (for password recovery)
+
+After GitHub Pages is enabled, open Authentication → URL Configuration:
+- Set the Site URL to `https://moghimi-ir.github.io/MG_V2RAY/`.
+- Add `https://moghimi-ir.github.io/MG_V2RAY/**` to the Additional Redirect URLs.
+
+Normal password login works without this redirect setting; it is needed for the forgot-password link.
