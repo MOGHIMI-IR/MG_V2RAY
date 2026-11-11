@@ -6,7 +6,7 @@
 
 **اپلیکیشن اندروید + کانفیگ‌های V2Ray + درخواست اتصال اختصاصی**
 
-[🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📲 دانلود مستقیم اندروید](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_1.0.0_arm64-v8a.apk) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
+[⬇️ دانلود مستقیم اپ اندروید](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_1.0.0_arm64-v8a.apk) · [🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
 
 </div>
 
