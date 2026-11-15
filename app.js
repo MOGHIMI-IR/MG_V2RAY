@@ -54,6 +54,39 @@ function fmtDate(value) {
   }).format(new Date(value));
 }
 
+const TELEGRAM_HEALTH_URL = "https://qaxiunpklkbgfjwmpwfp.supabase.co/functions/v1/moghimi-telegram";
+
+async function setupTelegramPurchase() {
+  const link = $("#telegram-buy-link");
+  const status = $("#telegram-bot-status");
+  if (!link || !status) return;
+
+  try {
+    const response = await fetch(TELEGRAM_HEALTH_URL, {
+      method: "GET",
+      cache: "no-store",
+      headers: { Accept: "application/json" }
+    });
+    const health = await response.json();
+    if (health.bot_username) {
+      const username = String(health.bot_username).replace(/^@/, "");
+      if (/^[A-Za-z0-9_]{5,32}$/.test(username)) {
+        link.href = "https://t.me/" + encodeURIComponent(username);
+        link.removeAttribute("aria-disabled");
+        status.textContent = health.ok
+          ? "ربات @" + username + " آمادهٔ سفارش است."
+          : "ربات شناسایی شد؛ وضعیت اتصال در حال بررسی است.";
+        return;
+      }
+    }
+    throw new Error("Bot username is unavailable");
+  } catch {
+    status.textContent = "فعلاً دریافت لینک ربات ممکن نشد؛ کمی بعد دوباره امتحان کن.";
+  }
+}
+
+setupTelegramPurchase();
+
 async function loadPublic() {
   const box = $("#public-configs");
   const empty = $("#empty-configs");
