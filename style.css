@@ -301,3 +301,17 @@ td{padding:13px 10px;border-bottom:1px solid rgba(213,224,255,.09);font-size:13p
   .download-button{width:100%;min-width:0;min-height:49px;font-size:13px}
   .download-footnote{margin-top:11px;font-size:10px;line-height:1.85}
 }
+
+
+/* Telegram subscription purchase card */
+.private-inner{grid-template-columns:1.05fr .85fr .85fr;gap:22px}
+.telegram-purchase-panel{min-width:0;padding:25px 27px;border:1px solid rgba(115,199,255,.3);border-radius:18px;background:linear-gradient(155deg,#152b48 0%,#17213b 100%);box-shadow:0 15px 35px rgba(0,0,0,.14)}
+.telegram-mark{display:grid;place-items:center;width:48px;height:48px;margin:20px 0 13px;border-radius:15px;background:rgba(77,166,230,.16);border:1px solid rgba(115,199,255,.28);color:#81c9ff;font-size:25px}
+.telegram-purchase-title{display:block;color:var(--ink);font-size:20px;font-weight:900;line-height:1.7}
+.telegram-purchase-panel p{margin:9px 0 18px;color:#c4d2e7;font-size:13px;line-height:2}
+.bot-buy-button{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 17px;border-radius:12px;background:#3b9cdb;color:#fff;font-size:14px;font-weight:900;transition:transform .2s,opacity .2s}
+.bot-buy-button:hover{transform:translateY(-2px);background:#4ca9e5}
+.bot-buy-button[aria-disabled="true"]{opacity:.58;pointer-events:none}
+.telegram-purchase-panel .price-note{min-height:34px}
+@media(max-width:900px){.private-inner{grid-template-columns:1fr 1fr;gap:20px}.private-copy{grid-column:1/-1}}
+@media(max-width:680px){.private-inner{display:flex;flex-direction:column;align-items:stretch;gap:18px}.telegram-purchase-panel{padding:20px;border-radius:15px}.telegram-purchase-title{font-size:19px}.telegram-purchase-panel p{font-size:13px}}
