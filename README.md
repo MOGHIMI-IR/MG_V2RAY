@@ -6,7 +6,7 @@
 
 **اپلیکیشن اندروید + کانفیگ‌های V2Ray + درخواست اتصال اختصاصی**
 
-[⬇️ دانلود مستقیم اپ اندروید](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_1.0.0_arm64-v8a%20%281%29.apk) · [🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
+[⬇️ دانلود مستقیم اپ اندروید](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.7_arm64-v8a.apk) · [🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
 
 </div>
 
@@ -14,12 +14,12 @@
 
 ## 📲 دانلود اپلیکیشن رسمی اندروید
 
-**دانلود مستقیم APK — نسخه 2.0.6 / ARM64**
+**دانلود مستقیم APK — نسخه 2.0.7 / ARM64**
 
 | دریافت | لینک |
 |---|---|
-| ⭐ دانلود ۱ · Supabase | [دانلود مستقیم فایل APK](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_1.0.0_arm64-v8a%20%281%29.apk) |
-| دانلود ۲ · GitHub | [دریافت نسخه از Releases](https://github.com/MOGHIMI-IR/MOGHIMI-VPN/releases/download/moghimi-beta-68/MoghimiV2Ray_2.0.6_arm64-v8a.apk) |
+| ⭐ دانلود ۱ · Supabase | [دانلود مستقیم فایل APK](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.7_arm64-v8a.apk) |
+| دانلود ۲ · GitHub | [دریافت نسخه از Releases](https://github.com/MOGHIMI-IR/MOGHIMI-VPN/releases/download/moghimi-beta-73/MoghimiV2Ray_2.0.7_arm64-v8a.apk) |
 
 > پیشنهاد: برای اکثر گوشی‌های اندرویدی جدید، نسخه **ARM64** مناسب است. اگر لینک اول در دسترس نبود، لینک دوم را امتحان کن. این فایل مخصوص Android است و روی iPhone نصب نمی‌شود.
 
