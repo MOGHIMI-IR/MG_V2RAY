@@ -295,36 +295,46 @@ td{padding:13px 10px;border-bottom:1px solid rgba(213,224,255,.09);font-size:13p
 /* Readable explanatory notes: calm contrast, clear edge and comfortable spacing */
 .readable-note{
   max-width:780px;
-  margin:16px 0 0;
-  padding:14px 17px;
-  border:1px solid rgba(130,202,255,.2);
-  border-inline-start:3px solid #82caff;
-  border-radius:13px;
-  background:linear-gradient(112deg,rgba(7,15,31,.88),rgba(26,37,66,.78));
-  box-shadow:inset 0 1px rgba(255,255,255,.025);
+  margin:10px 0 0;
+  padding:6px 9px;
+  border:1px solid rgba(190,207,236,.10);
+  border-inline-start:1px solid rgba(130,202,255,.23);
+  border-radius:8px;
+  background:rgba(255,255,255,.018);
   color:#d8e3f4!important;
-  font-size:15px!important;
-  line-height:2!important;
+  font-size:14px!important;
+  line-height:1.9!important;
 }
 .readable-note strong{color:#f5f7ff}
 .download-footnote{
   display:block;
   width:fit-content;
   max-width:100%;
-  margin:15px 0 0;
-  padding:9px 13px;
-  border:1px solid rgba(169,139,255,.2);
-  border-inline-start:3px solid var(--purple);
-  border-radius:10px;
-  background:rgba(7,15,31,.76);
+  margin:9px 0 0;
+  padding:5px 9px;
+  border:1px solid rgba(190,207,236,.10);
+  border-radius:8px;
+  background:rgba(255,255,255,.015);
   color:#d9e1f1;
-  font-size:13px;
-  line-height:1.9;
+  font-size:12px;
+  line-height:1.8;
 }
 .download-footnote strong{color:#f5f7ff}
-.download-action-copy small{color:#cbd7ea;font-size:13px;line-height:1.9}
+.download-action-copy small{
+  display:block;
+  width:fit-content;
+  max-width:100%;
+  margin-top:3px;
+  padding:4px 7px;
+  border:1px solid rgba(190,207,236,.08);
+  border-radius:7px;
+  background:rgba(255,255,255,.012);
+  color:#cbd7ea;
+  font-size:12px;
+  line-height:1.8
+}
 @media(max-width:680px){
-  .readable-note{margin-top:13px;padding:12px 13px;font-size:14px!important;line-height:1.95!important}
-  .download-footnote{margin-top:12px;padding:8px 10px;font-size:12px;line-height:1.85}
-  .download-action-copy small{font-size:12px;line-height:1.85}
+  .readable-note{margin-top:8px;padding:6px 8px;font-size:13px!important;line-height:1.85!important}
+  .download-footnote{margin-top:8px;padding:5px 8px;font-size:11px;line-height:1.8}
+  .download-action-copy small{font-size:11px;line-height:1.8}
 }
