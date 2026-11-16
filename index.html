@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1226">
-<meta name="description" content="مقیمی V2Ray (Moghimi V2Ray / MG_V2RAY): دانلود اپلیکیشن رسمی اندروید، مشاهده و دریافت کانفیگ‌های V2Ray و درخواست اتصال اختصاصی. اطلاعات سرویس و کانفیگ‌های منتشرشده در همین صفحه.">
+<meta name="description" content="مقیمی V2Ray (Moghimi V2Ray / MG_V2RAY): دانلود اپلیکیشن رسمی اندروید، تعداد کانفیگ‌های فعال، خرید اشتراک از ربات تلگرام و درخواست اتصال اختصاصی.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="MG_V2RAY">
 <link rel="canonical" href="https://moghimi-ir.github.io/MG_V2RAY/">
@@ -12,7 +12,7 @@
 <meta property="og:locale" content="fa_IR">
 <meta property="og:site_name" content="مقیمی V2Ray | MG_V2RAY">
 <meta property="og:title" content="مقیمی V2Ray | دانلود برنامه اندروید و کانفیگ V2Ray — MG_V2RAY">
-<meta property="og:description" content="مقیمی V2Ray (Moghimi V2Ray / MG_V2RAY): دانلود اپلیکیشن رسمی اندروید، مشاهده و دریافت کانفیگ‌های V2Ray و درخواست اتصال اختصاصی.">
+<meta property="og:description" content="مقیمی V2Ray (Moghimi V2Ray / MG_V2RAY): دانلود اپلیکیشن رسمی اندروید، تعداد کانفیگ‌های فعال، خرید اشتراک از ربات تلگرام و درخواست اتصال اختصاصی.">
 <meta property="og:url" content="https://moghimi-ir.github.io/MG_V2RAY/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="مقیمی V2Ray | دانلود برنامه اندروید و کانفیگ V2Ray — MG_V2RAY">
@@ -50,7 +50,7 @@
 <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48.png">
 <link rel="icon" type="image/x-icon" href="./favicon.ico">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<link rel="stylesheet" href="./style.css?v=20261113-3">
+<link rel="stylesheet" href="./style.css?v=20261116-1">
 </head>
 <body>
 <header class="topbar">
@@ -58,7 +58,7 @@
     <span class="brand-glyph">M<span>G</span></span><span class="brand-label">MG_V2RAY</span>
   </a>
   <nav class="main-nav" aria-label="ناوبری">
-    <a href="#download-app">دانلود برنامه</a><a href="#configs">کانفیگ‌ها</a><a href="#private">اتصال اختصاصی</a><a href="#support">حمایت</a>
+    <a href="#download-app">دانلود برنامه</a><a href="#configs">وضعیت سرورها</a><a href="#private">اتصال اختصاصی</a><a href="#telegram">ربات تلگرام</a><a href="#instagram">اینستاگرام</a><a href="#support">حمایت</a>
   </nav>
   <a class="header-action" href="#private">بزن بریم <span>←</span></a>
 </header>
@@ -114,15 +114,25 @@
     <p class="download-footnote">این فایل مخصوص گوشی‌های اندرویدی با معماری <strong>ARM64</strong> است.</p>
   </section>
 
-  <section class="section-wrap configs-section" id="configs">
-    <div class="section-heading">
-      <div><div class="section-kicker">کانفیگ‌های آماده</div><h2>یکی رو انتخاب کن،<br><em>و وصل شو.</em></h2></div>
-      <div class="section-description"><p>روی هر مورد بزن تا جزئیاتش باز بشه. بعدش می‌تونی کانفیگ رو کپی یا فایلش رو دریافت کنی.</p><div class="config-counter"><strong id="public-count">۰</strong><span>مورد در دسترس</span><i></i></div></div>
+  <section class="section-wrap configs-section" id="configs" aria-labelledby="configs-title">
+    <div class="active-configs-layout">
+      <div class="active-configs-copy">
+        <div class="section-kicker">وضعیت زندهٔ سرورها</div>
+        <h2 id="configs-title">کانفیگ‌های فعال،<br><em>مستقیم داخل برنامه.</em></h2>
+        <p>فهرست و متن کانفیگ‌ها در سایت نمایش داده نمی‌شود. برنامهٔ اندروید، موارد فعال را مستقیماً و به‌صورت خودکار از مخزن اصلی دریافت می‌کند.</p>
+        <div class="config-counter" aria-live="polite"><strong id="public-count">—</strong><span>کانفیگ فعال</span><i aria-hidden="true"></i></div>
+        <small id="public-count-status" class="active-count-status" role="status">در حال دریافت تعداد کانفیگ‌های فعال…</small>
+      </div>
+      <div class="active-configs-aside">
+        <div class="active-aside-orbit" aria-hidden="true"><span></span><i></i></div>
+        <div class="active-aside-card">
+          <span class="active-aside-label"><i aria-hidden="true"></i> مخزن کانفیگ مقیمی</span>
+          <strong>همگام با اپلیکیشن</strong>
+          <p>با فعال یا غیرفعال شدن هر مورد در پنل، فهرست دریافتی برنامه نیز مطابق وضعیت جدید به‌روزرسانی می‌شود.</p>
+          <a href="#download-app">دریافت اپلیکیشن <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
     </div>
-    <div class="config-list-head"><span>عنوان</span><span>نوع</span><span>عملیات</span></div>
-    <div id="public-configs" class="config-list"><div class="loading-card"><span class="spinner"></span> دارم فهرست رو می‌گیرم…</div></div>
-    <div id="empty-configs" class="empty-state hidden"><span class="empty-symbol">⌁</span><strong>فعلاً کانفیگی اینجا نیست.</strong><span>به‌محض اینکه چیزی اضافه بشه، همین‌جا می‌بینیش.</span></div>
-    <p class="list-footnote">کانفیگ‌ها ممکنه گاهی عوض بشن؛ برای استفاده، آخرین نسخه رو بردار.</p>
   </section>
 
   <section class="private-section" id="private">
@@ -140,14 +150,41 @@
         <div class="price-details"><span>حجم مصرف</span><b>نامحدود</b></div>
         <small class="price-note">جزئیات نهایی بعد از هماهنگی مشخص می‌شه.</small>
       </div>
+    </div>
+  </section>
+
+  <section class="telegram-section" id="telegram" aria-labelledby="telegram-title">
+    <div class="section-wrap telegram-inner">
+      <div class="telegram-copy">
+        <div class="section-kicker">خرید اشتراک از تلگرام</div>
+        <h2 id="telegram-title">خرید راحت‌تر،<br><span>مستقیم از ربات.</span></h2>
+        <p>برای خرید اشتراک لازم نیست فرم جداگانه پر کنی. داخل ربات طرح آمادهٔ ۱۰ گیگابایت یا حجم و مدت دلخواهت رو انتخاب کن و سفارش و رسید رو همون‌جا پیگیری کن.</p>
+        <div class="telegram-benefits">
+          <div><b>۰۱</b><span>انتخاب بستهٔ آماده یا سفارشی</span></div>
+          <div><b>۰۲</b><span>ثبت سفارش و ارسال رسید در تلگرام</span></div>
+          <div><b>۰۳</b><span>دریافت کد فعال‌سازی پس از تأیید</span></div>
+        </div>
+      </div>
       <div class="telegram-purchase-panel">
-        <div class="price-panel-top"><span>خرید از ربات تلگرام</span><span class="price-badge">سریع و مستقیم</span></div>
+        <div class="price-panel-top"><span>ربات رسمی مقیمی</span><span class="price-badge">سفارش آنلاین</span></div>
         <div class="telegram-mark" aria-hidden="true">✈</div>
-        <strong class="telegram-purchase-title">اشتراکت رو از ربات بگیر.</strong>
-        <p>طرح آمادهٔ ۱۰ گیگابایت یا حجم و مدت دلخواهت رو انتخاب کن؛ ثبت سفارش و ارسال رسید همون‌جا انجام می‌شه.</p>
-        <a id="telegram-buy-link" class="bot-buy-button" href="#" aria-disabled="true" rel="noopener">باز کردن ربات <span aria-hidden="true">↗</span></a>
+        <strong class="telegram-purchase-title">از ربات شروع کن.</strong>
+        <p>برای ورود به ربات رسمی و ثبت سفارش، دکمهٔ زیر رو بزن.</p>
+        <a id="telegram-buy-link" class="bot-buy-button" href="#" aria-disabled="true" rel="noopener noreferrer">ورود به ربات تلگرام <span aria-hidden="true">↗</span></a>
         <small id="telegram-bot-status" class="price-note" role="status">در حال بررسی وضعیت ربات…</small>
       </div>
+    </div>
+  </section>
+
+  <section class="instagram-section section-wrap" id="instagram" aria-labelledby="instagram-title">
+    <div class="instagram-card">
+      <div class="instagram-symbol" aria-hidden="true">◎</div>
+      <div class="instagram-copy">
+        <div class="section-kicker">ما را دنبال کن</div>
+        <h2 id="instagram-title">مقیمی V2Ray در اینستاگرام</h2>
+        <p>برای دنبال‌کردن صفحهٔ رسمی و دیدن اطلاعیه‌ها و خبرهای مقیمی V2Ray به اینستاگرام سر بزن.</p>
+      </div>
+      <a class="instagram-button" href="https://www.instagram.com/moghimi_v2ray/" target="_blank" rel="noopener noreferrer">مشاهدهٔ صفحهٔ اینستاگرام <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
@@ -172,9 +209,9 @@
   </section>
 </main>
 
-<footer class="footer section-wrap"><a class="brand footer-brand" href="#home"><span class="brand-glyph">M<span>G</span></span><span class="brand-label">MG_V2RAY</span></a><span class="footer-message">خوش اومدی؛ راحت استفاده کن.</span><a href="#home" class="back-top">رفتن به بالا ↑</a></footer>
+<footer class="footer section-wrap"><a class="brand footer-brand" href="#home"><span class="brand-glyph">M<span>G</span></span><span class="brand-label">MG_V2RAY</span></a><span class="footer-message">خوش اومدی؛ راحت استفاده کن.</span><a href="https://www.instagram.com/moghimi_v2ray/" target="_blank" rel="noopener noreferrer" class="footer-social">اینستاگرام ↗</a><a href="#home" class="back-top">رفتن به بالا ↑</a></footer>
 
-<nav class="mobile-nav" aria-label="دسترسی سریع"><a href="#home"><b>⌂</b><small>خانه</small></a><a href="#download-app"><b>↓</b><small>دانلود</small></a><a href="#configs"><b>⌁</b><small>کانفیگ‌ها</small></a><a href="#private" class="mobile-nav-main"><b>＋</b><small>اتصال</small></a><a href="#support"><b>♡</b><small>حمایت</small></a></nav>
+<nav class="mobile-nav" aria-label="دسترسی سریع"><a href="#home"><b>⌂</b><small>خانه</small></a><a href="#download-app"><b>↓</b><small>دانلود</small></a><a href="#configs"><b>⌁</b><small>سرورها</small></a><a href="#private"><b>＋</b><small>اختصاصی</small></a><a href="#telegram" class="mobile-nav-main"><b>✈</b><small>خرید</small></a></nav>
 
 <main id="admin-view" class="admin-shell hidden">
   <div class="admin-top"><a class="brand" href="#home"><span class="brand-glyph">M<span>G</span></span><span class="brand-label">MG_V2RAY</span></a><a href="#home" class="back-home">بازگشت به سایت ↗</a></div>
@@ -198,6 +235,6 @@
   </section>
 </main>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script type="module" src="./app.js?v=20261110-3"></script>
+<script type="module" src="./app.js?v=20261116-1"></script>
 </body>
 </html>
