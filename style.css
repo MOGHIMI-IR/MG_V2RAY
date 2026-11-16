@@ -338,3 +338,31 @@ td{padding:13px 10px;border-bottom:1px solid rgba(213,224,255,.09);font-size:13p
   .download-footnote{margin-top:8px;padding:5px 8px;font-size:11px;line-height:1.8}
   .download-action-copy small{font-size:11px;line-height:1.8}
 }
+
+
+/* A single, professional line-icon system */
+.ui-icon{display:inline-block;width:18px;height:18px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;overflow:visible}
+a .ui-icon,button .ui-icon{transition:transform .18s ease}
+a:hover .ui-icon,button:hover .ui-icon{transform:translateX(-2px)}
+.en-page a:hover .ui-icon,.en-page button:hover .ui-icon{transform:translateX(2px)}
+.hero-trust>.ui-icon{width:18px;height:18px}
+.aside-points>.ui-icon{width:18px;height:18px;color:var(--purple);margin-inline-start:auto}
+.quick-icon>.ui-icon{width:22px;height:22px}
+.telegram-mark>.ui-icon,.instagram-symbol>.ui-icon{width:27px;height:27px}
+.primary-button>.ui-icon,.header-action>.ui-icon,.download-button>.ui-icon,.bot-buy-button>.ui-icon,.instagram-button>.ui-icon{width:17px;height:17px}
+.primary-button>span:not([aria-hidden="true"]){font-size:inherit;font-weight:inherit}
+.mobile-nav b .ui-icon{width:20px;height:20px}
+.mobile-nav .mobile-nav-main b .ui-icon{width:18px;height:18px}
+.copy-card>.ui-icon,.icon-button>.ui-icon{width:17px;height:17px}
+.panel-icon>.ui-icon{width:22px;height:22px}
+.success-mark>.ui-icon{width:20px;height:20px}
+
+/* Visible, compact frames around short explanatory copy */
+.readable-note{display:block;width:fit-content;max-width:min(100%,820px);margin:10px 0 0;padding:10px 13px;border:1px solid rgba(130,202,255,.42)!important;border-inline-start:3px solid rgba(130,202,255,.92)!important;border-radius:10px;background:rgba(7,17,34,.86)!important;box-shadow:0 2px 10px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.025);color:#e5edf9!important;font-size:14px!important;line-height:1.9!important}
+.download-footnote{display:block;width:fit-content;max-width:100%;margin:10px 0 0;padding:7px 10px;border:1px solid rgba(169,139,255,.38);border-inline-start:3px solid rgba(169,139,255,.9);border-radius:9px;background:rgba(10,17,36,.78);color:#e5ebf7;font-size:12px;line-height:1.85}
+.download-footnote strong{color:#fff}
+.download-action-copy small{display:block;width:fit-content;max-width:100%;margin-top:4px;padding:5px 8px;border:1px solid rgba(130,202,255,.32);border-radius:8px;background:rgba(8,17,33,.72);color:#e0eaf8;font-size:12px;line-height:1.8}
+.quick-strip small{display:inline-block;width:fit-content;max-width:100%;margin-top:5px;padding:3px 7px;border:1px solid rgba(169,139,255,.30);border-radius:7px;background:rgba(169,139,255,.08);color:#d5def0;font-size:12px}
+.active-count-status,.price-note{display:inline-block;width:fit-content;max-width:100%;margin-top:7px;padding:5px 8px;border:1px solid rgba(130,202,255,.28);border-radius:8px;background:rgba(7,17,34,.65);color:#e0eaf8;line-height:1.8}
+.quick-icon,.telegram-mark,.instagram-symbol,.mobile-nav b{font-size:0}
+@media(max-width:680px){.readable-note{margin-top:8px;padding:8px 10px;font-size:13px!important;line-height:1.85!important}.download-footnote{margin-top:8px;padding:6px 8px;font-size:11px}.download-action-copy small{font-size:11px;line-height:1.8}.quick-strip small{font-size:11px;padding:3px 6px}.active-count-status,.price-note{font-size:11px;padding:4px 7px}}

@@ -162,7 +162,7 @@ $("#order-form")?.addEventListener("submit", async (event) => {
 
   const { error } = await supabase.from("orders").insert(row);
   button.disabled = false;
-  button.innerHTML = "<span>ثبت درخواست</span><b>↙</b>";
+  button.innerHTML = "<span>ثبت درخواست</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
 
   if (error) {
     message(msg, "ثبت درخواست انجام نشد. اطلاعات رو بررسی و دوباره تلاش کن.", true);
@@ -243,7 +243,7 @@ $("#login-form")?.addEventListener("submit", async (event) => {
   });
 
   button.disabled = false;
-  button.innerHTML = "<span>ورود به پنل</span><b>↙</b>";
+  button.innerHTML = "<span>ورود به پنل</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
 
   if (error) {
     message($("#login-message"), "ورود ناموفق بود؛ ایمیل و رمز رو بررسی کن.", true);
@@ -293,7 +293,7 @@ $("#register-form")?.addEventListener("submit", async (event) => {
   });
 
   button.disabled = false;
-  button.innerHTML = "<span>ساخت حساب</span><b>↙</b>";
+  button.innerHTML = "<span>ساخت حساب</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
 
   if (error) {
     message(msg, "ساخت حساب انجام نشد. تنظیمات ثبت‌نام و ایمیل Supabase رو بررسی کن.", true);
@@ -424,7 +424,7 @@ function resetEntry() {
   $("#config-text-field").classList.remove("hidden");
   $("#config-file-field").classList.add("hidden");
   $("#editor-heading").textContent = "افزودن کانفیگ";
-  $("#save-entry").innerHTML = "<span>ذخیره کانفیگ</span><b>↙</b>";
+  $("#save-entry").innerHTML = "<span>ذخیره کانفیگ</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
   $("#cancel-edit").classList.add("hidden");
   $("#entry-message").textContent = "";
 }
@@ -449,7 +449,7 @@ function editEntry(id) {
   $("#config-text-field").classList.toggle("hidden", entry.entry_type !== "text");
   $("#config-file-field").classList.toggle("hidden", entry.entry_type !== "file");
   $("#editor-heading").textContent = "ویرایش کانفیگ";
-  $("#save-entry").innerHTML = "<span>ثبت تغییرات</span><b>↙</b>";
+  $("#save-entry").innerHTML = "<span>ثبت تغییرات</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
   $("#cancel-edit").classList.remove("hidden");
   $("#entry-message").textContent = entry.entry_type === "file"
     ? "برای جایگزینی فایل، فایل جدید رو انتخاب کن؛ در غیر این صورت فایل فعلی حفظ می‌شه."
@@ -508,7 +508,7 @@ $("#entry-form")?.addEventListener("submit", async (event) => {
     });
     if (error) {
       button.disabled = false;
-      button.innerHTML = old ? "<span>ثبت تغییرات</span><b>↙</b>" : "<span>ذخیره کانفیگ</span><b>↙</b>";
+      button.innerHTML = old ? "<span>ثبت تغییرات</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>" : "<span>ذخیره کانفیگ</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
       return message(msg, "آپلود فایل ناموفق بود؛ دسترسی Storage رو بررسی کن.", true);
     }
     path = uploaded;
@@ -531,7 +531,7 @@ $("#entry-form")?.addEventListener("submit", async (event) => {
     : await supabase.from("v2ray_entries").insert({ id, ...payload });
 
   button.disabled = false;
-  button.innerHTML = old ? "<span>ثبت تغییرات</span><b>↙</b>" : "<span>ذخیره کانفیگ</span><b>↙</b>";
+  button.innerHTML = old ? "<span>ثبت تغییرات</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>" : "<span>ذخیره کانفیگ</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>";
 
   if (result.error) {
     if (uploaded) await supabase.storage.from("v2ray-files").remove([uploaded]);
