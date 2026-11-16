@@ -87,81 +87,29 @@ async function setupTelegramPurchase() {
 
 setupTelegramPurchase();
 
-async function loadPublic() {
-  const box = $("#public-configs");
-  const empty = $("#empty-configs");
+async function loadPublicCount() {
   const count = $("#public-count");
-  if (!box || !empty) return;
+  const status = $("#public-count-status");
+  if (!count) return;
 
-  const { data, error } = await supabase
+  if (status) status.textContent = "در حال دریافت تعداد کانفیگ‌های فعال…";
+  const { count: activeCount, error } = await supabase
     .from("v2ray_entries")
-    .select("id,title,description,entry_type,config_text,file_path,file_name,created_at")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false });
+    .select("id", { count: "exact", head: true })
+    .eq("is_active", true);
 
-  if (error) {
-    box.innerHTML = '<div class="empty-state"><strong>گرفتن فهرست با مشکل مواجه شد.</strong><span>اتصال رو بررسی کن و دوباره امتحان کن.</span></div>';
-    if (count) count.textContent = "۰";
-    empty.classList.add("hidden");
+  if (error || activeCount === null) {
+    count.textContent = "—";
+    if (status) status.textContent = "تعداد کانفیگ‌های فعال فعلاً در دسترس نیست.";
     return;
   }
 
-  box.innerHTML = "";
-  if (count) count.textContent = new Intl.NumberFormat("fa-IR").format(data?.length || 0);
-  empty.classList.toggle("hidden", Boolean(data?.length));
-  if (!data?.length) return;
-
-  data.forEach((entry, index) => {
-    const row = document.createElement("article");
-    row.className = "config-row";
-
-    const preview = entry.entry_type === "text"
-      ? '<pre class="config-preview">' + esc(entry.config_text || "") + "</pre>"
-      : '<div class="config-preview">فایل آماده‌ی دریافت: ' + esc(entry.file_name || "config") + "</div>";
-
-    const action = entry.entry_type === "text"
-      ? '<button type="button" class="mini-button copy-config">کپی کانفیگ</button>'
-      : '<button type="button" class="mini-button download-config">دریافت فایل ↓</button>';
-
-    row.innerHTML =
-      '<div class="config-row-main">' +
-        '<span class="config-row-index">' + String(index + 1).padStart(2, "0") + '</span>' +
-        '<div class="config-row-title"><strong>' + esc(entry.title) + '</strong>' +
-          '<small>' + esc(entry.description || "کانفیگ منتشرشده در MG_V2RAY") + '</small></div>' +
-      '</div>' +
-      '<span class="config-row-type">' + (entry.entry_type === "text" ? "متن کانفیگ" : "فایل کانفیگ") + '</span>' +
-      '<button type="button" class="config-row-open" aria-expanded="false">باز کردن +</button>' +
-      '<div class="config-detail hidden">' + preview + '<div class="config-actions">' + action + '</div></div>';
-
-    const toggle = row.querySelector(".config-row-open");
-    const detail = row.querySelector(".config-detail");
-    toggle.addEventListener("click", () => {
-      const isOpen = !detail.classList.contains("hidden");
-      detail.classList.toggle("hidden", isOpen);
-      row.classList.toggle("is-open", !isOpen);
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      toggle.textContent = isOpen ? "باز کردن +" : "بستن −";
-    });
-
-    if (entry.entry_type === "text") {
-      row.querySelector(".copy-config").addEventListener("click", () => copy(entry.config_text || ""));
-    } else {
-      row.querySelector(".download-config").addEventListener("click", async (event) => {
-        const button = event.currentTarget;
-        button.disabled = true;
-        const { data: signed, error: signedError } = await supabase
-          .storage.from("v2ray-files")
-          .createSignedUrl(entry.file_path, 600, { download: entry.file_name || true });
-        button.disabled = false;
-        if (signedError || !signed?.signedUrl) {
-          toast("دریافت فایل ممکن نشد؛ دوباره تلاش کن.");
-          return;
-        }
-        window.open(signed.signedUrl, "_blank", "noopener");
-      });
-    }
-    box.append(row);
-  });
+  count.textContent = new Intl.NumberFormat("fa-IR").format(activeCount);
+  if (status) {
+    status.textContent = activeCount > 0
+      ? "تعداد به‌روزِ کانفیگ‌های فعال"
+      : "فعلاً کانفیگ فعالی منتشر نشده است.";
+  }
 }
 
 function openOrder() {
@@ -256,7 +204,7 @@ function route() {
   $(".footer").classList.toggle("hidden", admin);
   $(".mobile-nav")?.classList.toggle("hidden", admin);
   if (admin) initAdmin();
-  else loadPublic();
+  else loadPublicCount();
 }
 
 window.addEventListener("hashchange", route);
