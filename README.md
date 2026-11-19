@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 🚀 MOGHIMI V2RAY
+# 🚀 MOGHIMI . V2RAY
 
 **اپلیکیشن اندروید + کانفیگ‌های V2Ray + درخواست اتصال اختصاصی**
 
