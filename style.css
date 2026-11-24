@@ -5,7 +5,7 @@
   --yellow:#ffd84d;--yellow-soft:rgba(255,216,77,.12);--purple:#a98bff;
   --purple-soft:rgba(169,139,255,.13);--line:rgba(213,224,255,.14);
   --font:"Arad","Manrope",Tahoma,Arial,sans-serif;
-  --display-font:"Vazirmatn",Tahoma,Arial,sans-serif;
+  --display-font:"Arad","Manrope",Tahoma,Arial,sans-serif;
   font-family:var(--font);background:var(--bg);color:var(--ink);
   font-synthesis:none;text-rendering:optimizeLegibility
 }
@@ -366,3 +366,52 @@ a:hover .ui-icon,button:hover .ui-icon{transform:translateX(-2px)}
 .active-count-status,.price-note{display:inline-block;width:fit-content;max-width:100%;margin-top:7px;padding:5px 8px;border:1px solid rgba(130,202,255,.28);border-radius:8px;background:rgba(7,17,34,.65);color:#e0eaf8;line-height:1.8}
 .quick-icon,.telegram-mark,.instagram-symbol,.mobile-nav b{font-size:0}
 @media(max-width:680px){.readable-note{margin-top:8px;padding:8px 10px;font-size:13px!important;line-height:1.85!important}.download-footnote{margin-top:8px;padding:6px 8px;font-size:11px}.download-action-copy small{font-size:11px;line-height:1.8}.quick-strip small{font-size:11px;padding:3px 6px}.active-count-status,.price-note{font-size:11px;padding:4px 7px}}
+
+
+/* GTA VI-inspired neon dusk accents for selected deep-navy sections. */
+.private-section{
+ background:radial-gradient(ellipse at 8% 24%,rgba(255,87,146,.18),transparent 34%),radial-gradient(ellipse at 92% 78%,rgba(67,190,255,.16),transparent 36%),linear-gradient(118deg,#171b3a 0%,#282044 48%,#142b48 100%);
+ border-color:rgba(130,202,255,.24);
+}
+.telegram-section{
+ background:radial-gradient(ellipse at 6% 82%,rgba(255,115,126,.14),transparent 34%),radial-gradient(ellipse at 92% 12%,rgba(65,190,255,.16),transparent 35%),linear-gradient(125deg,#101c38 0%,#251d43 54%,#102c49 100%);
+ border-color:rgba(130,202,255,.24);
+}
+.configs-section{background:radial-gradient(ellipse at 8% 5%,rgba(255,92,145,.10),transparent 35%),radial-gradient(ellipse at 94% 95%,rgba(66,186,255,.10),transparent 34%),linear-gradient(135deg,#141f39 0%,#1b2447 100%)}
+.active-configs-aside{background:radial-gradient(circle at 82% 16%,rgba(255,87,146,.13),transparent 34%),radial-gradient(circle at 10% 90%,rgba(67,190,255,.12),transparent 34%),linear-gradient(145deg,#101a32,#111d38)}
+.price-panel,.telegram-purchase-panel{border-color:rgba(130,202,255,.30);box-shadow:0 18px 44px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.035)}
+
+/* Slightly larger supporting copy; outlines frame the text, not the section. */
+.readable-note{font-size:15px!important;line-height:1.95!important}
+.download-version{font-size:12px}
+.download-copy>p{font-size:15px}
+.download-file-label{font-size:13px}
+.download-action-copy strong{font-size:18px}
+.download-action-copy small{font-size:13px}
+.download-footnote{font-size:13px}
+.active-configs-copy>p{font-size:16px}
+.active-count-status,.price-note{font-size:13px}
+.quick-strip small{font-size:13px}
+.private-copy p{font-size:17px}
+.telegram-copy>p{font-size:16px}
+.telegram-purchase-panel p{font-size:14px}
+.telegram-benefits span{font-size:14px}
+.instagram-copy p{font-size:14px}
+.footer-message{font-size:14px}
+
+/* The border hugs only the warning sentence, not a full-width alert card. */
+.download-warning{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:11px 0 0;padding:0;border:0;background:transparent;color:#f3e8c8;font-size:14px;line-height:1.9}
+.warning-icon{flex:0 0 auto;font-size:17px;line-height:1}
+.download-warning-text{display:inline-block;width:fit-content;max-width:100%;padding:7px 10px;border:1px solid rgba(255,216,77,.42);border-inline-start:3px solid var(--yellow);border-radius:9px;background:rgba(255,216,77,.055);color:#f3e8c8}
+@media(max-width:680px){
+ .readable-note{font-size:14px!important;line-height:1.9!important}
+ .download-action-copy small{font-size:12px}
+ .download-footnote,.active-count-status,.price-note{font-size:12px}
+ .quick-strip small{font-size:12px}
+ .private-copy p{font-size:16px}
+ .telegram-copy>p{font-size:15px}
+ .telegram-purchase-panel p,.telegram-benefits span,.instagram-copy p{font-size:13px}
+ .footer-message{font-size:13px}
+ .download-warning{font-size:13px;line-height:1.85;align-items:flex-start}
+ .download-warning-text{padding:6px 8px}
+}
