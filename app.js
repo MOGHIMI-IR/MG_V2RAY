@@ -1,10 +1,10 @@
-const SUPABASE_URL = "https://atrwhvyhopifugphfcpe.client.co";
+const SUPABASE_URL = "https://atrwhvyhopifugphfcpe.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9jauFOO0mFzTSs5rtI2Orw_ZekPGGdt";
 const OWNER_EMAIL = "mahdim495mk@gmail.com";
 const CARD_NUMBER = "6037998221406068";
 
 const $ = (selector) => document.querySelector(selector);
-const $ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
 let supabaseClientPromise = null;
 let authListenerInstalled = false;
@@ -85,7 +85,7 @@ function fmtDate(value) {
   }).format(new Date(value));
 }
 
-const TELEGRAM_HEALTH_URL = "https://qaxiunpklkbgfjwmpwfp.client.co/functions/v1/moghimi-telegram";
+const TELEGRAM_HEALTH_URL = "https://qaxiunpklkbgfjwmpwfp.supabase.co/functions/v1/moghimi-telegram";
 
 async function setupTelegramPurchase() {
   const link = $("#telegram-buy-link");
@@ -131,7 +131,8 @@ async function loadPublicCount() {
     });
     const contentRange = response.headers.get("Content-Range") || "";
     const rawCount = contentRange.slice(contentRange.lastIndexOf("/") + 1);
-    if (response.ok && /^\\d+$/.test(rawCount)) activeCount = Number(rawCount);
+    const parsedCount = Number(rawCount);
+    if (response.ok && rawCount !== "" && Number.isSafeInteger(parsedCount) && parsedCount >= 0) activeCount = parsedCount;
   } catch {
     // The public counter is optional; the rest of the website remains usable.
   }
