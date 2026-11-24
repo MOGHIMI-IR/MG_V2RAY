@@ -1,13 +1,44 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.95.0";
-
-const SUPABASE_URL = "https://atrwhvyhopifugphfcpe.supabase.co";
+const SUPABASE_URL = "https://atrwhvyhopifugphfcpe.client.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_9jauFOO0mFzTSs5rtI2Orw_ZekPGGdt";
 const OWNER_EMAIL = "mahdim495mk@gmail.com";
 const CARD_NUMBER = "6037998221406068";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const $ = (selector) => document.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const $ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+let supabaseClientPromise = null;
+let authListenerInstalled = false;
+async function getSupabase() {
+  if (!supabaseClientPromise) {
+    supabaseClientPromise = import("https://esm.sh/@supabase/supabase-js@2.95.0")
+      .then(({ createClient }) => createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY))
+      .catch((error) => {
+        supabaseClientPromise = null;
+        toast("اتصال به سرویس ابری برقرار نشد؛ دوباره تلاش کن.");
+        throw error;
+      });
+  }
+  const client = await supabaseClientPromise;
+  if (!authListenerInstalled) {
+    client.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        const password = prompt("رمز عبور جدید (حداقل ۸ کاراکتر):");
+        if (password && password.length >= 8) {
+          client.auth.updateUser({ password }).then(({ error }) => {
+            toast(error ? "تغییر رمز انجام نشد." : "رمز عبور تغییر کرد.");
+          });
+        }
+      }
+      if (event === "SIGNED_OUT" && location.hash.replace(/^#/, "").startsWith("admin")) {
+        $("#dashboard-view").classList.add("hidden");
+        $("#login-view").classList.remove("hidden");
+        setAuthMode("login");
+      }
+    });
+    authListenerInstalled = true;
+  }
+  return client;
+}
 const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
 }[char]));
@@ -54,7 +85,7 @@ function fmtDate(value) {
   }).format(new Date(value));
 }
 
-const TELEGRAM_HEALTH_URL = "https://qaxiunpklkbgfjwmpwfp.supabase.co/functions/v1/moghimi-telegram";
+const TELEGRAM_HEALTH_URL = "https://qaxiunpklkbgfjwmpwfp.client.co/functions/v1/moghimi-telegram";
 
 async function setupTelegramPurchase() {
   const link = $("#telegram-buy-link");
@@ -91,25 +122,26 @@ async function loadPublicCount() {
   const count = $("#public-count");
   const status = $("#public-count-status");
   if (!count) return;
-
   if (status) status.textContent = "در حال دریافت تعداد کانفیگ‌های فعال…";
-  const { count: activeCount, error } = await supabase
-    .from("v2ray_entries")
-    .select("id", { count: "exact", head: true })
-    .eq("is_active", true);
-
-  if (error || activeCount === null) {
+  let activeCount = null;
+  try {
+    const response = await fetch(SUPABASE_URL + "/rest/v1/v2ray_entries?select=id&is_active=eq.true", {
+      method: "HEAD", cache: "no-store",
+      headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Prefer: "count=exact", Range: "0-0", "Range-Unit": "items" }
+    });
+    const contentRange = response.headers.get("Content-Range") || "";
+    const rawCount = contentRange.slice(contentRange.lastIndexOf("/") + 1);
+    if (response.ok && /^\\d+$/.test(rawCount)) activeCount = Number(rawCount);
+  } catch {
+    // The public counter is optional; the rest of the website remains usable.
+  }
+  if (activeCount === null) {
     count.textContent = "—";
     if (status) status.textContent = "تعداد کانفیگ‌های فعال فعلاً در دسترس نیست.";
     return;
   }
-
   count.textContent = new Intl.NumberFormat("fa-IR").format(activeCount);
-  if (status) {
-    status.textContent = activeCount > 0
-      ? "تعداد به‌روزِ کانفیگ‌های فعال"
-      : "فعلاً کانفیگ فعالی منتشر نشده است.";
-  }
+  if (status) status.textContent = activeCount > 0 ? "تعداد به‌روزِ کانفیگ‌های فعال" : "فعلاً کانفیگ فعالی منتشر نشده است.";
 }
 
 function openOrder() {
@@ -141,6 +173,7 @@ $("#copy-card")?.addEventListener("click", () => copy(CARD_NUMBER));
 
 $("#order-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const client = await getSupabase();
   const form = event.currentTarget;
   const button = $("#submit-order");
   const msg = $("#order-message");
@@ -160,7 +193,7 @@ $("#order-form")?.addEventListener("submit", async (event) => {
   button.innerHTML = "<span>در حال ثبت…</span>";
   message(msg, "");
 
-  const { error } = await supabase.from("orders").insert(row);
+  const { error } = await client.from("orders").insert(row);
   button.disabled = false;
   button.innerHTML = "<span>ثبت درخواست</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M19 12H5'/><path d='m12 19-7-7 7-7'/></svg>";
 
@@ -170,7 +203,7 @@ $("#order-form")?.addEventListener("submit", async (event) => {
   }
 
   try {
-    await supabase.functions.invoke("notify-order", { body: { orderId: id } });
+    await client.functions.invoke("notify-order", { body: { orderId: id } });
   } catch {
     // The order is already stored; email notification failure must not hide success.
   }
@@ -210,11 +243,12 @@ function route() {
 window.addEventListener("hashchange", route);
 
 async function initAdmin() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const client = await getSupabase();
+  const { data: { session } } = await client.auth.getSession();
   if (session?.user?.email?.toLowerCase() === OWNER_EMAIL) {
     showDashboard(session.user);
   } else {
-    if (session) await supabase.auth.signOut();
+    if (session) await client.auth.signOut();
     $("#login-view").classList.remove("hidden");
     $("#dashboard-view").classList.add("hidden");
     setAuthMode("login");
@@ -231,13 +265,14 @@ function showDashboard(user) {
 
 $("#login-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const client = await getSupabase();
   const button = $("#login-submit");
   const values = new FormData(event.currentTarget);
   button.disabled = true;
   button.innerHTML = "<span>در حال ورود…</span>";
   message($("#login-message"), "");
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await client.auth.signInWithPassword({
     email: String(values.get("email")).trim().toLowerCase(),
     password: String(values.get("password"))
   });
@@ -250,7 +285,7 @@ $("#login-form")?.addEventListener("submit", async (event) => {
     return;
   }
   if (data.user?.email?.toLowerCase() !== OWNER_EMAIL) {
-    await supabase.auth.signOut();
+    await client.auth.signOut();
     message($("#login-message"), "این حساب اجازه‌ی ورود به پنل رو نداره.", true);
     return;
   }
@@ -259,6 +294,7 @@ $("#login-form")?.addEventListener("submit", async (event) => {
 
 $("#register-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const client = await getSupabase();
   const form = event.currentTarget;
   const values = new FormData(form);
   const email = String(values.get("email") || "").trim().toLowerCase();
@@ -284,7 +320,7 @@ $("#register-form")?.addEventListener("submit", async (event) => {
   button.innerHTML = "<span>در حال ساخت حساب…</span>";
   message(msg, "");
 
-  const { data, error } = await supabase.auth.signUp({
+  const { data, error } = await client.auth.signUp({
     email,
     password,
     options: {
@@ -309,12 +345,13 @@ $("#register-form")?.addEventListener("submit", async (event) => {
 });
 
 $("#forgot-password")?.addEventListener("click", async () => {
+  const client = await getSupabase();
   const email = $("#login-form [name=email]").value.trim().toLowerCase();
   if (email !== OWNER_EMAIL) {
     message($("#login-message"), "ایمیل واردشده برای حساب مدیر معتبر نیست.", true);
     return;
   }
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+  const { error } = await client.auth.resetPasswordForEmail(email, {
     redirectTo: location.origin + location.pathname + "#admin"
   });
   message($("#login-message"),
@@ -324,32 +361,18 @@ $("#forgot-password")?.addEventListener("click", async () => {
   );
 });
 
-supabase.auth.onAuthStateChange((event) => {
-  if (event === "PASSWORD_RECOVERY") {
-    const password = prompt("رمز عبور جدید (حداقل ۸ کاراکتر):");
-    if (password && password.length >= 8) {
-      supabase.auth.updateUser({ password }).then(({ error }) => {
-        toast(error ? "تغییر رمز انجام نشد." : "رمز عبور تغییر کرد.");
-      });
-    }
-  }
-  if (event === "SIGNED_OUT" && location.hash.replace(/^#/, "").startsWith("admin")) {
-    $("#dashboard-view").classList.add("hidden");
-    $("#login-view").classList.remove("hidden");
-    setAuthMode("login");
-  }
-});
-
 $("#logout")?.addEventListener("click", async () => {
-  await supabase.auth.signOut();
+  const client = await getSupabase();
+  await client.auth.signOut();
   toast("از پنل خارج شدی.");
 });
 $("#refresh-data")?.addEventListener("click", loadDashboard);
 
 async function loadDashboard() {
+  const client = await getSupabase();
   const [configs, requests] = await Promise.all([
-    supabase.from("v2ray_entries").select("*").order("created_at", { ascending: false }),
-    supabase.from("orders").select("*").order("created_at", { ascending: false }).limit(100)
+    client.from("v2ray_entries").select("*").order("created_at", { ascending: false }),
+    client.from("orders").select("*").order("created_at", { ascending: false }).limit(100)
   ]);
 
   if (configs.error || requests.error) {
@@ -458,9 +481,10 @@ function editEntry(id) {
 }
 
 async function toggleEntry(id) {
+  const client = await getSupabase();
   const entry = entries.find((item) => item.id === id);
   if (!entry) return;
-  const { error } = await supabase.from("v2ray_entries")
+  const { error } = await client.from("v2ray_entries")
     .update({ is_active: !entry.is_active, updated_at: new Date().toISOString() })
     .eq("id", id);
   if (error) return toast("تغییر وضعیت انجام نشد.");
@@ -469,17 +493,19 @@ async function toggleEntry(id) {
 }
 
 async function deleteEntry(id) {
+  const client = await getSupabase();
   const entry = entries.find((item) => item.id === id);
   if (!entry || !confirm("«" + entry.title + "» حذف بشه؟")) return;
-  const { error } = await supabase.from("v2ray_entries").delete().eq("id", id);
+  const { error } = await client.from("v2ray_entries").delete().eq("id", id);
   if (error) return toast("حذف کانفیگ ناموفق بود.");
-  if (entry.file_path) await supabase.storage.from("v2ray-files").remove([entry.file_path]);
+  if (entry.file_path) await client.storage.from("v2ray-files").remove([entry.file_path]);
   toast("کانفیگ حذف شد.");
   loadDashboard();
 }
 
 $("#entry-form")?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const client = await getSupabase();
   const form = event.currentTarget.elements;
   const button = $("#save-entry");
   const msg = $("#entry-message");
@@ -503,7 +529,7 @@ $("#entry-form")?.addEventListener("submit", async (event) => {
   if (type === "file" && file) {
     const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-100) || "config.txt";
     uploaded = "configs/" + crypto.randomUUID() + "-" + safe;
-    const { error } = await supabase.storage.from("v2ray-files").upload(uploaded, file, {
+    const { error } = await client.storage.from("v2ray-files").upload(uploaded, file, {
       contentType: file.type || "application/octet-stream"
     });
     if (error) {
@@ -527,19 +553,19 @@ $("#entry-form")?.addEventListener("submit", async (event) => {
   };
 
   const result = old
-    ? await supabase.from("v2ray_entries").update(payload).eq("id", id)
-    : await supabase.from("v2ray_entries").insert({ id, ...payload });
+    ? await client.from("v2ray_entries").update(payload).eq("id", id)
+    : await client.from("v2ray_entries").insert({ id, ...payload });
 
   button.disabled = false;
   button.innerHTML = old ? "<span>ثبت تغییرات</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M19 12H5'/><path d='m12 19-7-7 7-7'/></svg>" : "<span>ذخیره کانفیگ</span><svg class='ui-icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M19 12H5'/><path d='m12 19-7-7 7-7'/></svg>";
 
   if (result.error) {
-    if (uploaded) await supabase.storage.from("v2ray-files").remove([uploaded]);
+    if (uploaded) await client.storage.from("v2ray-files").remove([uploaded]);
     return message(msg, "ذخیره انجام نشد؛ دسترسی مدیر یا اطلاعات ورودی رو بررسی کن.", true);
   }
 
   if (old?.file_path && old.file_path !== path) {
-    await supabase.storage.from("v2ray-files").remove([old.file_path]);
+    await client.storage.from("v2ray-files").remove([old.file_path]);
   }
 
   resetEntry();
@@ -548,7 +574,8 @@ $("#entry-form")?.addEventListener("submit", async (event) => {
 });
 
 async function updateStatus(id, status) {
-  const { error } = await supabase.from("orders").update({ status }).eq("id", id);
+  const client = await getSupabase();
+  const { error } = await client.from("orders").update({ status }).eq("id", id);
   if (error) return toast("تغییر وضعیت درخواست انجام نشد.");
   toast("وضعیت درخواست به‌روز شد.");
   loadDashboard();
