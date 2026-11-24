@@ -6,7 +6,7 @@
 
 **اپلیکیشن اندروید + کانفیگ‌های V2Ray + درخواست اتصال اختصاصی**
 
-[⬇️ دانلود مستقیم اپ اندروید · نسخه ۲.۰.۸](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.8_arm64-v8a.apk) · [🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
+[⬇️ دانلود مستقیم اپ اندروید · نسخه ۲.۰.۱۰](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.10_arm64-v8a.apk) · [🌐 ورود به سایت رسمی](https://moghimi-ir.github.io/MG_V2RAY/) · [📦 مخزن اپلیکیشن](https://github.com/MOGHIMI-IR/MOGHIMI-VPN)
 
 </div>
 
@@ -14,13 +14,13 @@
 
 ## 📲 دانلود اپلیکیشن رسمی اندروید
 
-**Moghimi V2Ray · نسخه 2.0.8 Beta 87 · ARM64**  
-**Version Code: 4000087**
+**Moghimi V2Ray · نسخه 2.0.10 Beta 103 · ARM64**  
+**Version Code: 4000103**
 
 | دریافت | لینک |
 |---|---|
-| ⭐ دانلود مستقیم · Supabase | [دانلود APK نسخه ۲.۰.۸](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.8_arm64-v8a.apk) |
-| دانلود از GitHub | [دریافت APK از Release 87](https://github.com/MOGHIMI-IR/MOGHIMI-VPN/releases/download/moghimi-beta-87/MoghimiV2Ray_2.0.8_arm64-v8a.apk) |
+| ⭐ دانلود مستقیم · Supabase | [دانلود APK نسخه ۲.۰.۱۰](https://atrwhvyhopifugphfcpe.supabase.co/storage/v1/object/public/app-releases/MoghimiV2Ray_2.0.10_arm64-v8a.apk) |
+| دانلود از GitHub | [دریافت APK از Release 103](https://github.com/MOGHIMI-IR/MOGHIMI-VPN/releases/download/moghimi-beta-103/MoghimiV2Ray_2.0.10_arm64-v8a.apk) |
 | سوابق نسخه‌ها | [مشاهده همه Releases](https://github.com/MOGHIMI-IR/MOGHIMI-VPN/releases) |
 
 این فایل برای دستگاه‌های اندرویدی با معماری **ARM64 / arm64-v8a** است. روی iPhone نصب نمی‌شود.
@@ -43,6 +43,10 @@
 - مدیریت کانفیگ‌های شخصی و افزودن از لینک، متن، فایل یا QR.
 - جلوگیری از کپی و اشتراک‌گذاری کانفیگ‌های گروه ابری مقیمی.
 - رابط اختصاصی با انیمیشن‌های بومی اندروید.
+
+## ⚠️ نکتهٔ نصب روی گوشی‌های قدیمی
+
+در بعضی مدل‌های قدیمی، آماده‌سازی و نصب APK ممکن است کمی بیشتر طول بکشد؛ تا پایان نصب صبور باشید. این فایل فعلی مخصوص معماری **ARM64 / arm64-v8a** است.
 
 ## 🔄 به‌روزرسانی برنامه
 
